@@ -19,6 +19,9 @@ class VideoController {
     this.controlsManager = new window.VSC.ControlsManager(actionHandler, config);
     this.shouldStartHidden = shouldStartHidden;
 
+    // Flag to prevent showing controller during initialization
+    this.isInitializing = true;
+
     // Generate unique controller ID for badge tracking
     this.controllerId = this.generateControllerId(target);
 
@@ -35,17 +38,20 @@ class VideoController {
       window.VSC.logger.error('StateManager not available during VideoController initialization');
     }
 
-    // Initialize speed
-    this.initializeSpeed();
-
-    // Create UI
+    // Create UI first to ensure proper hiding
     this.div = this.initializeControls();
+
+    // Initialize speed after UI is created and properly hidden
+    this.initializeSpeed();
 
     // Set up event handlers
     this.setupEventHandlers();
 
     // Set up mutation observer for src changes
     this.setupMutationObserver();
+
+    // Clear initialization flag after everything is set up
+    this.isInitializing = false;
 
     window.VSC.logger.info('VideoController initialized for video element');
   }
@@ -59,10 +65,16 @@ class VideoController {
 
     window.VSC.logger.debug(`Setting initial playbackRate to: ${targetSpeed}`);
 
-    // Use adjustSpeed for initial speed setting to ensure consistency
-    if (this.actionHandler && targetSpeed !== this.video.playbackRate) {
-      window.VSC.logger.debug('Setting initial speed via adjustSpeed');
-      this.actionHandler.adjustSpeed(this.video, targetSpeed, { source: 'internal' });
+    // Set initial speed directly without triggering visual feedback during initialization
+    if (targetSpeed !== this.video.playbackRate) {
+      window.VSC.logger.debug('Setting initial speed directly during initialization');
+      // Set speed directly to avoid triggering display effects during init
+      this.video.playbackRate = targetSpeed;
+      
+      // Update speed indicator if available
+      if (this.speedIndicator) {
+        this.speedIndicator.textContent = window.VSC.Constants.formatSpeed(targetSpeed);
+      }
     }
   }
 

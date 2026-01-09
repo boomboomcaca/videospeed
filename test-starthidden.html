@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试startHidden功能</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        video {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            border: 2px solid #007cba;
+            margin: 10px 0;
+        }
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .note {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>视频速度控制器 - startHidden功能测试</h1>
+        
+        <div class="instructions">
+            <h3>测试说明:</h3>
+            <ol>
+                <li>确保Video Speed Controller插件已安装并启用</li>
+                <li>在插件设置中启用"Hide controller by default"选项</li>
+                <li>刷新此页面观察控制器行为</li>
+                <li>修复后，控制器应该立即隐藏，不会短暂显示</li>
+                <li>按V键可以手动显示/隐藏控制器</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h3>测试视频1 - 本地视频源</h3>
+            <video controls>
+                <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAGxtZGF0AAAC7wYF///73EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MiByMzA4MSBhNjI3Y2EzIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTMgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJfcHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTEwIHNjZW5lY3V0PTQwIGludHJhX3JlZnJlc2g9MCByY19sb29rYWhlYWQ9NDAgcmM9Y3JmIG1idHJlZT0xIGNyZj0yMy4wIHFjb21wPTAuNjAgcXBtaW49MCBxcG1heD02OSBxcHN0ZXA9NCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAABOWWIhAAv//72r2/JKHuvKs6E+3dZnI0L/y0d6AbOsJQ8Rbv9pQ3HJ1NIGnBYLeB7r4T1LQ//1nW7/I/z8cOl3M1/uAqT1v2CeaK7/f4Q1M4KC0jFW/1j3I+z6IMgcKKb1FE7Hf7T3dL1L1+f5YA07+9uOs0ioe14ZT7XKL2aQA/z7wUIKhYK2BxBwCNLFBgCGC/E6P7HaMZJtzUeiB7N4D/z3vWnl/+V3e0SlqSgJnoUcjQL8k8o/UXZxEyQsNigJAo4SQB7RO8AJRvMzsFPV8j0lBKCBNi5BNOpHCWqZw+B5fzj8VAqHrUGJk7j46eR1fbCkLhD2qNfKXF4Pi5hxF3BVN+s7ZQoSF2Qb3D4Td4TW/jVh8fWuvh6oj+Qt3hY8eGJ7pKb8x/FNKFKp0Tj8XQJC9aa7Mjq0s8JBro0ijk4caQZamQZNtgK1CmjpWqKV+CFCGyhwKn3iiUFZnbwWXMtuO2xB8Cglp4Uf4A1oN1//BP/0Z1F6LPtJCjNhTsA/ePz/XcLfkL4l+fBqhDl0Ze7VgqtfQJNx8jjRVfX8AmohzIsZOA/YE1W9yhKGqgJiCG7XOZ7Lt3eaIiZDt6v6tODq+v/n/j8ovrAKF7OJhQAC//71dHqQAAAwAAAwAAAwAADAYJ0AyRuRnfhNhkQj/oRjXLiRvJ0DT/VQBVN48Q=" type="video/mp4">
+                您的浏览器不支持视频标签。
+            </video>
+            <div class="note">这是一个短小的测试视频，用于观察控制器行为</div>
+        </div>
+
+        <div class="test-section">
+            <h3>测试视频2 - YouTube嵌入视频</h3>
+            <iframe width="400" height="225" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            <div class="note">测试YouTube视频的控制器行为</div>
+        </div>
+
+        <div class="test-section">
+            <h3>测试说明</h3>
+            <ul>
+                <li><strong>修复前</strong>：控制器会短暂显示几秒后消失</li>
+                <li><strong>修复后</strong>：控制器应该立即隐藏，没有闪现</li>
+                <li><strong>手动显示</strong>：按V键可以显示控制器</li>
+                <li><strong>再次隐藏</strong>：再次按V键可以隐藏控制器</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>观察要点</h3>
+            <ol>
+                <li>页面加载时，控制器是否立即隐藏（无闪现）</li>
+                <li>切换视频源时，新控制器是否正确隐藏</li>
+                <li>手动显示后的控制器功能是否正常</li>
+                <li>重新隐藏后是否保持隐藏状态</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些测试用的控制台输出
+        console.log('测试页面已加载，观察视频速度控制器的startHidden行为');
+        
+        // 监听视频事件
+        document.querySelectorAll('video').forEach((video, index) => {
+            video.addEventListener('loadedmetadata', () => {
+                console.log(`视频 ${index + 1} 元数据已加载`);
+            });
+            
+            video.addEventListener('canplay', () => {
+                console.log(`视频 ${index + 1} 可以播放`);
+            });
+        });
+        
+        // 提供手动测试函数
+        window.testStartHidden = function() {
+            console.log('开始测试startHidden功能...');
+            const videos = document.querySelectorAll('video');
+            videos.forEach((video, i) => {
+                if (video.vsc && video.vsc.div) {
+                    const controller = video.vsc.div;
+                    const isHidden = controller.classList.contains('vsc-hidden');
+                    console.log(`视频${i+1}控制器状态: ${isHidden ? '隐藏' : '显示'}`);
+                } else {
+                    console.log(`视频${i+1}: 控制器未找到或未初始化`);
+                }
+            });
+        };
+        
+        console.log('可以运行 testStartHidden() 来检查控制器状态');
+    </script>
+</body>
+</html>

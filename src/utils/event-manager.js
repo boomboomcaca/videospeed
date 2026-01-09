@@ -267,6 +267,16 @@ class EventManager {
    * @param {Element} controller - Controller element
    */
   showController(controller) {
+    // Get the video element associated with this controller
+    const video = controller.getRootNode().host?.vsc?.video || 
+                  document.querySelector(`video[data-vsc-id="${controller.dataset.vscId}"]`);
+    
+    // Don't show controller during initialization
+    if (video && video.vsc && video.vsc.isInitializing) {
+      window.VSC.logger.debug('Controller initialization in progress - skipping temporary display');
+      return;
+    }
+
     // When startHidden is enabled, only show temporary feedback if the user has
     // previously interacted with this controller manually (vsc-manual class)
     // This prevents unwanted controller appearances on pages where user wants them hidden

@@ -150,7 +150,14 @@ class ShadowDOMManager {
     // Create controller div
     const controller = document.createElement('div');
     controller.id = 'controller';
-    controller.style.cssText = `top:${top}; left:${left}; opacity:${opacity};`;
+    
+    // Check if host wrapper should start hidden and apply immediate style to prevent flash
+    const shouldHide = wrapper.classList.contains('vsc-hidden') || wrapper.classList.contains('vsc-nosource');
+    const initialStyles = shouldHide ? 
+      `top:${top}; left:${left}; opacity:0 !important; display:none !important; visibility:hidden !important;` :
+      `top:${top}; left:${left}; opacity:${opacity};`;
+    
+    controller.style.cssText = initialStyles;
 
     // Create draggable speed indicator
     const draggable = document.createElement('span');
